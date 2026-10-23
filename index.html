@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f3f0e8" />
+    <title>Clean Browser</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+    <header class="topbar">
+      <button class="brand" id="homeButton" type="button" aria-label="Return to Clean Browser home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Clear</span>
+      </button>
+      <div class="topbar-actions">
+        <button class="icon-button" id="focusToggle" type="button" aria-label="Enter focus mode" title="Focus mode">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+        </button>
+        <button class="icon-button" id="settingsToggle" type="button" aria-label="Open settings" title="Settings">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V21h-4v-.08A1.7 1.7 0 0 0 9 19.37a1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.63 15a1.7 1.7 0 0 0-1.56-1H3v-4h.08A1.7 1.7 0 0 0 4.63 9a1.7 1.7 0 0 0-.34-1.88l-.06-.06 2.83-2.83.06.06A1.7 1.7 0 0 0 9 4.63h.01A1.7 1.7 0 0 0 10 3.08V3h4v.08A1.7 1.7 0 0 0 15 4.63a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.83 2.83-.06.06A1.7 1.7 0 0 0 19.37 9a1.7 1.7 0 0 0 1.56 1H21v4h-.08A1.7 1.7 0 0 0 19.4 15Z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <nav class="browser-bar" id="browserBar" aria-label="Browsing controls">
+      <button class="icon-button" id="backButton" type="button" aria-label="Go back" title="Back">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <button class="icon-button" id="reloadButton" type="button" aria-label="Reload page" title="Reload">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.34 5.66M20 4v7h-7"/></svg>
+      </button>
+      <form class="address-form" id="addressForm">
+        <label class="sr-only" for="addressInput">Search or enter address</label>
+        <input class="current-address" id="addressInput" name="address" value="" placeholder="Search or enter address" />
+      </form>
+    </nav>
+
+    <main id="homeView">
+      <section class="search-zone" aria-labelledby="timeLabel">
+        <p class="eyebrow" id="timeLabel"></p>
+        <h1 id="greeting">Good morning.</h1>
+        <form class="search" id="searchForm" role="search">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+          <label class="sr-only" for="query">Search or enter address</label>
+          <input id="query" name="query" type="search" autocomplete="off" placeholder="Search or enter address" />
+          <span class="shortcut" aria-hidden="true">⌘ K</span>
+        </form>
+      </section>
+
+      <section class="favorites-section" aria-labelledby="favoritesTitle">
+        <div class="section-heading">
+          <h2 id="favoritesTitle">Favorites</h2>
+          <button class="text-button" id="addFavorite" type="button">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+            Add
+          </button>
+        </div>
+        <div class="favorites" id="favorites"></div>
+      </section>
+    </main>
+
+    <section class="browser-view" id="browserView" aria-label="Browser page" hidden>
+      <iframe id="pageFrame" title="Web page" sandbox="allow-forms allow-modals allow-popups allow-same-origin allow-scripts"></iframe>
+    </section>
+
+    <dialog id="favoriteDialog">
+      <form id="favoriteForm" class="dialog-form">
+        <div class="dialog-heading">
+          <h2>Add a favorite</h2>
+          <button class="icon-button close-button" type="button" aria-label="Close" data-close>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg>
+          </button>
+        </div>
+        <label for="favoriteName">Name</label>
+        <input id="favoriteName" required maxlength="24" placeholder="Example" />
+        <label for="favoriteUrl">Address</label>
+        <input id="favoriteUrl" required type="url" placeholder="https://example.com" />
+        <div class="dialog-actions">
+          <button class="secondary-button" type="button" data-close>Cancel</button>
+          <button class="primary-button" type="submit">Add favorite</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="settingsDialog">
+      <div class="dialog-form">
+        <div class="dialog-heading">
+          <h2>Appearance</h2>
+          <button class="icon-button close-button" type="button" aria-label="Close" data-close-settings>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg>
+          </button>
+        </div>
+        <label class="setting-row">
+          <span>Quiet mode</span>
+          <input id="quietToggle" type="checkbox" role="switch" />
+        </label>
+        <p class="setting-copy">Use a softer background and hide the clock.</p>
+        <label class="setting-row">
+          <span>Night mode</span>
+          <input id="nightToggle" type="checkbox" role="switch" />
+        </label>
+        <p class="setting-copy">Use dark colors for the browser controls.</p>
+        <label class="setting-row">
+          <span>Reserved mode</span>
+          <input id="reservedToggle" type="checkbox" role="switch" />
+        </label>
+        <p class="setting-copy">Browse without adding pages to history.</p>
+        <label for="fontChoice">Font</label>
+        <select id="fontChoice">
+          <option value="clean">Clean sans</option>
+          <option value="editorial">Editorial serif</option>
+          <option value="mono">Monospace</option>
+        </select>
+        <p class="setting-copy">Choose a type style for the browser controls.</p>
+        <div class="history-heading">
+          <h3>History</h3>
+          <button class="text-button" id="clearHistory" type="button">Clear</button>
+        </div>
+        <div class="history-list" id="historyList"></div>
+      </div>
+    </dialog>
+
+    <script src="script.js"></script>
+  </body>
+</html>
