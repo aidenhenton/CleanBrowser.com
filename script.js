@@ -186,6 +186,9 @@ document.querySelector("#backButton").addEventListener("click", () => {
 document.querySelector("#reloadButton").addEventListener("click", () => {
   pageFrame.src = pageFrame.src;
 });
+document.querySelector("#externalOpenButton").addEventListener("click", () => {
+  window.open(pageFrame.src, "_blank", "noopener,noreferrer");
+});
 document.querySelector("#addFavorite").addEventListener("click", () => favoriteDialog.showModal());
 document.querySelector("#settingsToggle").addEventListener("click", () => {
   renderHistory();
